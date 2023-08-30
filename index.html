@@ -35,6 +35,36 @@
       </td>
     </tr>
   </table>
+
+  <div id="weather" style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); width: 20%; padding: 20px; background-color: #ffffff;"></div>
+<script>
+  const apiKey = '0c730364abf730a82e4d73a4a0f16d99';
+  const city = 'Colombo';
+
+  // Make an API request to get weather data
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+    .then((response) => response.json())
+    .then((data) => {
+      const weatherElement = document.getElementById('weather');
+      const temperature = data.main.temp;
+      const description = data.weather[0].description;
+      const icon = data.weather[0].icon;
+
+      weatherElement.innerHTML = `
+        <h2>Weather in ${city}</h2>
+        <p>Temperature: ${temperature}°C</p>
+        <p>Description: ${description}</p>
+        <img src="https://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+
+        <img src="image6.jpg" alt="Weather Icon" width= "110" "height="55" style="float: right">
+      `;
+       
+    })
+    .catch((error) => {
+      console.error('Error fetching weather data:', error);
+    });
+</script>
+
 </body>
 </html>
 
